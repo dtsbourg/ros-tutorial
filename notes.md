@@ -53,3 +53,25 @@ source ~/workspace/setup.zsh
 * `rosrun package_name node_name`
 * `rosnode clean` (clean node list)
 * `rosnode ping node_name`
+
+## ROS Topics
+* nodes can publish to Topics
+* nodes can subscribe to topics
+* `rosrun rqt_graph rqt_graph` show topic graph
+* `rosrun rqt_plot rqt_plot` plots
+* `rostopic [cmd] [args]` info about topics
+  * `rostopic echo [topic]` show data being published to the topic
+  * `rostopic list -v` show all topics subscribed / published to
+  * `rostopic type [topic]` show message type (`rosmsg show [message_name]` for more info)
+  * publish `rostopic pub [topic] [msg_type] [args]` (-n to publish n messages, -r for 1 Hz refresh)
+  * publish rate `rostopic hz [topic]`
+
+## ROS Services
+* `rosservice list` print information about active services
+* `rosservice call` call the service with the provided args
+* `rosservice type` print service type
+* `rosservice find` find services by service type
+* `rosservice uri` print service ROSRPC uri
+
+## ROS Parameter server
+* use `rosparam` to store and manipulate data (`set`, `get`, `load`, `dump`, `delete`, `list`)
