@@ -2,6 +2,7 @@
 
 ## Setup
 * Config file is in `/opt/ros/indigo/setup.zsh`
+
 **Workspace**
 ```
 rosws init ~/workspace-name /opt/ros/indigo
@@ -33,3 +34,22 @@ source ~/workspace/setup.zsh
 ## Building a ROS package
 * `rosmake [package]`
 * `rosdep [package]` installs package dependencies
+
+# ROS Basics
+
+## ROS Nodes
+### Definitions
+* node = executable within a ROS package
+* messages = ROS data type for subscribing or publishing to a topic
+* topics = where nodes publish messages
+* master = name service for ROS
+* rosout = ROS stdout
+* roscore = Master + rosout + parameter server
+
+### Running
+* `roscore` (use to start ROS stack)
+* `rosnode list` (shows active nodes)
+* `rosnode info /node_name`
+* `rosrun package_name node_name`
+* `rosnode clean` (clean node list)
+* `rosnode ping node_name`
