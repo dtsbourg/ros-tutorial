@@ -26,6 +26,7 @@ source ~/workspace/setup.zsh
 * `rosstack find [package_name]`
 * `roscd [locationname[/subdir]]`
 * `rosls [locationname[/subdir]]`
+* `roscp [package_name] [file_to_copy_path] [copy_path]`
 
 ## Creating a ROS package
 * ` roscreate-pkg [package_name] [depend1] [depend2] [depend3]`
@@ -79,10 +80,45 @@ source ~/workspace/setup.zsh
 ## ROS tooling
 ### Logging
 * `rqt_console` attaches to the logging framework to display output from nodes
-* `rqt_logger_lvel` change the verbosity level
+* `rqt_logger_level` change the verbosity level
 
 ### Running
 * `roslaunch [package] [filename.launch]` launches nodes as specified in launch file
 
 ### Editing
 * `rosed [package_name] [filename]` allows editing a file within a package without specifying the full path
+
+## ROS message-passing
+Note : don't forget to build the project after adding msg / srv : `rosmake [projet_name]`
+### msg
+* description of ROS message
+* stored in `msg/Filename.msg`
+* in `CMakeLists.txt` uncomment `rosbuild_genmsg()`
+* Types
+  * int8, int16, int32, int64 (plus uint*)
+  * float32, float64
+  * string
+  * time, duration
+  * other msg files
+  * variable-length array[] and fixed-length array[C]
+  * Header (timestamp + frame info)
+
+```
+Header header
+string child_frame_id
+geometry_msgs/PoseWithCovariance pose
+geometry_msgs/TwistWithCovariance twist
+```
+
+### srv
+* decription of a service
+* stored in `srv/Filename.srv`
+* in `CMakeLists.txt` uncomment `rosbuild_gensrv()`
+* `rossrv show [service]` to get info
+
+```
+int64 A #requests
+int64 B
+---
+int64 Sum #response
+```
