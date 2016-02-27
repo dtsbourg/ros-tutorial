@@ -75,3 +75,14 @@ source ~/workspace/setup.zsh
 
 ## ROS Parameter server
 * use `rosparam` to store and manipulate data (`set`, `get`, `load`, `dump`, `delete`, `list`)
+
+## ROS tooling
+### Logging
+* `rqt_console` attaches to the logging framework to display output from nodes
+* `rqt_logger_lvel` change the verbosity level
+
+### Running
+* `roslaunch [package] [filename.launch]` launches nodes as specified in launch file
+
+### Editing
+* `rosed [package_name] [filename]` allows editing a file within a package without specifying the full path
