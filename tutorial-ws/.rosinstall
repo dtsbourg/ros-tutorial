@@ -5,3 +5,4 @@
 # IF YOU CHANGE IT, USE rosinstall FOR THE CHANGES TO TAKE EFFECT
 - setup-file: {local-name: /opt/ros/indigo/setup.sh}
 - other: {local-name: sandbox}
+- other: {local-name: sandbox/beginner_tutorials/tutorial-ws}

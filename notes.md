@@ -33,6 +33,7 @@ source ~/workspace/setup.zsh
 * checking dependencies : `rospack depends1 [package_name]`
 
 ## Building a ROS package
+* don't forget to use `rosmake --pre-clean` if cmake complains about cache location
 * `rosmake [package]`
 * `rosdep [package]` installs package dependencies
 
