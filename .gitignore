@@ -33,6 +33,9 @@ srv/_*.py
 *.pyc
 qtcreator-*
 *.user
+.rosinstall
+.rosinstall.*
+setup.*
 
 /planning/cfg
 /planning/docs
