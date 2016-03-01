@@ -123,3 +123,19 @@ int64 B
 ---
 int64 Sum #response
 ```
+
+## ROS data records
+
+* run the services (`roscore; rosrun [topic] [node]`)
+* `rostopic list -v` : examine the list of topics
+* `rosbag record` record (note: inside `/bagfiles/bagfile.bag`)
+  * `-a` record all topics
+  * `-O subset <param_names>` record a subset (note: in file `subset.bag`)
+* `rosbag info <bagfile>` to get info
+* `rosbag play <bagfile>` to replay data (note: node needs to be running)
+  * `-r <rate>` replay at a different rate
+  * `-s <duration>` start replay at a different time
+
+## ROS Debugging
+
+* `roswtf`
