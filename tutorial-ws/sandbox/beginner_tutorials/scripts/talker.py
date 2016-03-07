@@ -45,7 +45,7 @@ def talker():
     pub = rospy.Publisher('chatter', String, queue_size=10) # queue_size : limits the amount of queued messages
     # Node must have base name (no '/')
     rospy.init_node('talker', anonymous=True) # anonymous : generates uid for the node (no collisions)
-    rate = rospy.Rate(10) # 10hz
+    rate = rospy.Rate(1) # 10hz
     while not rospy.is_shutdown():
         hello_str = "hello world %s" % rospy.get_time()
         # Messages are printed to screen, to the log file, and to rosout

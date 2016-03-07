@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# coding=utf-8
+# encoding=utf-8
 # Software License Agreement (BSD License)
 #
 # Copyright (c) 2008, Willow Garage, Inc.
@@ -34,23 +34,43 @@
 #
 # Revision $Id$
 
-## Simple talker demo that listens to std_msgs/Strings published
-## to the 'chatter' topic
 
 import rospy
+import roslib; roslib.load_manifest('beginner_tutorials')
 from std_msgs.msg import String
+from geometry_msgs.msg import Pose, Point
+from beginner_tutorials.msg import ScaledPose
+
+__last_state__ = ScaledPose()
+__last_string__ = "hello"
+
+def pose_callback(data):
+    global __last_state__
+    __last_state__ = data
 
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + 'I heard %s', data.data)
+    global __last_string__
+    __last_string__ = data.data
 
 def listener():
-    # Init 'listener' node
     rospy.init_node('listener', anonymous=True)
-    # subscribe to 'chatter' topic
     rospy.Subscriber('chatter', String, callback)
+    rospy.Subscriber('pose_logger', ScaledPose, pose_callback)
+    print "Subscribed"
 
-    # spin() simply keeps python from exiting until this node is stopped
-    rospy.spin()
+def work_loop():
+    rate = rospy.Rate(5) # 5 Hz
+    while not rospy.is_shutdown():
+        print "Last string : \n %s" % __last_string__
+        print "Last scaled pose : "
+        print scale_pose(__last_state__.pose, __last_state__.scale)
+        rate.sleep()
+
+def scale_pose(pose, scale):
+    pos = pose.position
+    scaled_pos = Point(pos.x * scale, pos.y * scale, pos.z * scale)
+    return Pose(scaled_pos, pose.orientation)
 
 if __name__ == '__main__':
     listener()
+    work_loop()
