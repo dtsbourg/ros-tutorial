@@ -5,14 +5,12 @@
 
 **Workspace**
 ```
-rosws init ~/workspace-name /opt/ros/indigo
+catkin_init_workspace
 ```
 
 **Sandbox**
 ```
-mkdir ~/workspace/sandbox
-rosws set ~/workspace/sandbox
-source ~/workspace/setup.zsh
+source devel/setup.zsh
 ```
 
 ## ROS FS
