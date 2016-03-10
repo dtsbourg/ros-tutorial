@@ -1,0 +1,4 @@
+string word
+int16 echo_strength
+---
+string echo

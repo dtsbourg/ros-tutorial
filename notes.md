@@ -27,12 +27,13 @@ source devel/setup.zsh
 * `roscp [package_name] [file_to_copy_path] [copy_path]`
 
 ## Creating a ROS package
-* ` roscreate-pkg [package_name] [depend1] [depend2] [depend3]`
+* ` catkin_create-pkg [package_name] [depend1] [depend2] [depend3]`
 * checking dependencies : `rospack depends1 [package_name]`
 
 ## Building a ROS package
-* don't forget to use `rosmake --pre-clean` if cmake complains about cache location
-* `rosmake [package]`
+* `catkin_make [make_targets]`
+  * `catkin_make` will build all packages in src (run from ws)
+  * `catkin_make install`
 * `rosdep [package]` installs package dependencies
 
 # ROS Basics
@@ -88,11 +89,15 @@ source devel/setup.zsh
 * `rosed [package_name] [filename]` allows editing a file within a package without specifying the full path
 
 ## ROS message-passing
-Note : don't forget to build the project after adding msg / srv : `rosmake [projet_name]`
+Note : don't forget to build the project after adding msg / srv : `catkin_make`
 ### msg
 * description of ROS message
 * stored in `msg/Filename.msg`
-* in `CMakeLists.txt` uncomment `rosbuild_genmsg()`
+* in `CMakeLists.txt`
+  * add `message_generation`
+  * make sure message runtime dependency is exported
+  * uncomment `add_message_files` and add `.msg` files
+  * uncomment `generate_messages()` and add all dependencies
 * Types
   * int8, int16, int32, int64 (plus uint*)
   * float32, float64
@@ -112,7 +117,15 @@ geometry_msgs/TwistWithCovariance twist
 ### srv
 * decription of a service
 * stored in `srv/Filename.srv`
-* in `CMakeLists.txt` uncomment `rosbuild_gensrv()`
+* in `CMakeLists.txt`
+  * add `message_generation` to `find_package`
+  * uncomment `add_service_files()` and add `.srv` files
+* in `package.xml` uncomment :
+```
+<build_depend>message_generation</build_depend>
+ <run_depend>message_runtime</run_depend>
+```
+
 * `rossrv show [service]` to get info
 
 ```
